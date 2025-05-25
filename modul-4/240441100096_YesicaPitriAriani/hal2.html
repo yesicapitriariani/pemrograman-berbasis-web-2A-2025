@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Halaman Kedua - ByteAcademy Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .dark-mode {
+      background-color: #1a202c;
+      color: #cbd5e0;
+    }
+    .dark-mode a {
+      color: #90cdf4 !important;
+    }
+  </style>
+</head>
+<body id="main-body" class="min-h-screen flex flex-col md:flex-row font-sans transition-colors duration-300">
+
+  <div class="md:w-1/2 w-full bg-[#4B1FB1] flex items-center justify-center p-8 transition-colors duration-300">
+    <img src="Gambar 5.png" alt="Ilustrasi Belajar" class="max-w-xs md:max-w-md w-full" />
+  </div>
+
+  <div class="md:w-1/2 w-full flex items-center justify-center p-8 transition-colors duration-300">
+    <div class="w-full max-w-md">
+      <h1 class="text-2xl font-bold mb-2">Mulai Hari Ini</h1>
+      <p class="text-sm mb-6">Menunggu besok? Bisa jadi kamu takkan pernah mulai.</p>
+
+<form id="signupForm" onsubmit="return validasiForm(event)" class="space-y-4">
+  <div>
+    <label class="block text-sm font-medium mb-1">Alamat Email</label>
+    <input id="email" type="email" placeholder="Masukkan Alamat Email Anda" class="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none" >
+    <p id="emailError" class="text-red-500 text-sm mt-1 hidden"></p>
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium mb-1">Nama Lengkap</label>
+    <input id="nama" type="text" placeholder="Masukkan Nama Lengkap Anda" class="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none" >
+    <p id="namaError" class="text-red-500 text-sm mt-1 hidden"></p>
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium mb-1">Password</label>
+    <input id="password" type="password" placeholder="Masukkan Password Anda" class="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none">
+    <p id="passwordError" class="text-red-500 text-sm mt-1 hidden"></p>
+  </div>
+
+  <button type="submit" class="w-full py-2 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold hover:opacity-90 transition">
+    Sign Up
+  </button>
+
+  <button type="button"
+    class="w-full py-2 rounded-full border mt-2 flex items-center justify-center space-x-2 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-5 h-5" />
+    <span>Sign Up with Google</span>
+  </button>
+</form>
+
+
+  <script>
+    window.onload = function () {
+      const mode = localStorage.getItem("mode");
+      const body = document.getElementById("main-body");
+      if (mode === "dark") {
+        body.classList.add("dark-mode");
+      }
+    };
+
+    function validasiForm(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email");
+      const nama = document.getElementById("nama");
+      const password = document.getElementById("password");
+
+      const emailError = document.getElementById("emailError");
+      const namaError = document.getElementById("namaError");
+      const passwordError = document.getElementById("passwordError");
+
+      emailError.textContent = "";
+      namaError.textContent = "";
+      passwordError.textContent = "";
+
+      emailError.classList.add("hidden");
+      namaError.classList.add("hidden");
+      passwordError.classList.add("hidden");
+
+      let valid = true;
+
+      if (email.value.trim() === "") {
+        emailError.textContent = "Email tidak boleh kosong.";
+        emailError.classList.remove("hidden");
+        valid = false;
+      } else if (!email.value.includes("@") || !email.value.includes(".")) {
+        emailError.textContent = "Format email tidak valid.";
+        emailError.classList.remove("hidden");
+        valid = false;
+      }
+
+      if (nama.value.trim() === "") {
+        namaError.textContent = "Nama tidak boleh kosong.";
+        namaError.classList.remove("hidden");
+        valid = false;
+      }
+
+      if (password.value.trim() === "") {
+        passwordError.textContent = "Password tidak boleh kosong.";
+        passwordError.classList.remove("hidden");
+        valid = false;
+      } else if (password.value.length < 6) {
+        passwordError.textContent = "Password harus minimal 6 karakter.";
+        passwordError.classList.remove("hidden");
+        valid = false;
+      }
+
+      if (valid) {
+        alert("Pendaftaran berhasil!");
+      }
+
+      return valid;
+    }
+  </script>
+</body>
+</html>
